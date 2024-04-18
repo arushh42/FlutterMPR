@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'main.dart';
 
 class AdminPage extends StatelessWidget {
   final List<Product>? customerProducts; // Making customerProducts optional
@@ -74,7 +75,18 @@ class AdminPage extends StatelessWidget {
                     );
                     customerProducts!.add(newProduct);
                   }
-                  Navigator.pop(context);
+                  Future.delayed(Duration(seconds: 2), () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPage(
+                          productName: nameController.text,
+                          productPrice: priceController.text,
+                          description: descriptionController.text,
+                        ),
+                      ),
+                    );
+                  });
                 } else {
                   // Show error message if fields are empty or invalid
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
